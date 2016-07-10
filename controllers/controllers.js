@@ -49,8 +49,8 @@ function postNewLog(req,res) { //this works
 	});
 	console.log("outputing this from postNewLog" +log);
 	//var highestExisting = findHighestID();
-	var highestExisting = GuestLog.find({}).sort('-_id')[0];
-	console.log(highestExisting);
+	//var highestExisting = GuestLog.find({}).sort('-_id')[0];
+	//console.log(highestExisting);
 	res.json(log);
 }
 

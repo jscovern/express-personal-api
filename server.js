@@ -2,6 +2,7 @@
 var express = require('express'),
     app = express();
   var path = require('path');
+  var logger = require('morgan');
 
 // parse incoming urlencoded form data
 // and populate the req.body object
@@ -27,6 +28,7 @@ mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI || process.
 // i.e. `/images`, `/scripts`, `/styles`
 app.use(express.static('public'));
 var routes = require('./config/routes');
+app.use(routes);
 
 /*
  * HTML Endpoints

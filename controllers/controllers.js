@@ -25,6 +25,8 @@ function getAllGuestLogs(req,res) {
 			res.json({message: "Could not find any guest logs"});
 		}
 		res.json(guestLogs);
+		console.log("these are the guest logs returned from getallguest logs: "+guestLogs);
+		return guestLogs;
 	});
 }
 

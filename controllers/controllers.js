@@ -29,11 +29,24 @@ function getAllGuestLogs(req,res) { //this works
 	});
 }
 
+function findHighestID(req, res) {
+	var highestID = 0;
+	GuestLog.find({}, function(error,guestLogs) {
+		if(error) res.json({message: "Couldn't find any guest logs "+error});
+		console.log("guestLogs length is "+guestLogs.length);
+		for (var i=0; i<guestLogs.length; i++) {
+			console.log("id for guestLogs["+i+"] are "+guestLogs[i]._id);
+			if(guestLogs[i]._id > highestID) {
+				console.log("in the if highest");
+				highestID = guestLogs[i]._id;
+			}
+		}
+		return highestID;
+	});
+}
+
 function postNewLog(req,res) { //this works
 	var log = new GuestLog(req.body);
-	//var allLogs = getAllGuestLogs(req,res);
-	//console.log("in the postNewLog, and the allLogs var, which is the output of the getallguestlogs function call is "+allLogs);
-	//console.log("right after that, and looking at allLogs[0] just to see what I get" + allLogs[0]);
 	log.save(function(error) {
 		if(error){ 
 			res.json({message: "Could not create a new guest log b/c: "+error});
@@ -41,6 +54,8 @@ function postNewLog(req,res) { //this works
 	});
 	res.json(log);
 	console.log("outputing this from postNewLog" +log);
+	var highestExisting = findHighestID(req,res);
+	console.log(highestExisting);
 }
 
 function getOneGuestsLogs(req,res) { //this works

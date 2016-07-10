@@ -2,7 +2,7 @@ var Profile = require('../models/profile');
 var GuestLog = require('../models/guestLogs');
 //INDEX
 
-function returnAll(req,res) {
+function returnAll(req,res) { //this works
 	Profile.find(function(error, profiles) {
 		console.log("inside the find in returnAll for profiles");	
 		if(error) response.json({message: 'Could not find any profiles'});
@@ -10,7 +10,7 @@ function returnAll(req,res) {
 	});
 }
 
-function postProfile(req,res) {
+function postProfile(req,res) { //this works
 	console.log('in POST');
 	var profile = new Profile(req.body);
 	profile.save(function(error) {
@@ -19,7 +19,7 @@ function postProfile(req,res) {
 	res.redirect('/profile');
 }
 
-function getAllGuestLogs(req,res) {
+function getAllGuestLogs(req,res) { //this works
 	GuestLog.find(function(error,guestLogs) {
 		if(error){ 
 			res.json({message: "Could not find any guest logs"});
@@ -31,7 +31,7 @@ function getAllGuestLogs(req,res) {
 	});
 }
 
-function postNewLog(req,res) {
+function postNewLog(req,res) { //this works
 	var log = new GuestLog(req.body);
 	log.save(function(error) {
 		if(error){ 
@@ -42,7 +42,7 @@ function postNewLog(req,res) {
 	console.log("outputing this from postNewLog" +log);
 }
 
-function getOneGuestsLogs(req,res) {
+function getOneGuestsLogs(req,res) { //this works
 	var id = req.params.id;
 	GuestLog.findById({_id: id}, function(error, guestLogs) {
 		if(error) {
@@ -66,15 +66,18 @@ function removePost(req,res) {
 
 function updatePost(req,res) {
 	var id = req.params.id;
+	console.log("in the updatePost, got id from the url as "+id);
 	GuestLog.findById({_id: id}, function(error,guestLogs) {
+		console.log("in the updatePost, and inside the GuestLog.findbyid, and the guestLogs return is "+guestLogs);
+		console.log("in the updatePost, and inside the GuestLogs.findByID, and the req.body is "+req.body);
 		if(error) {
 			res.json({message: "couldn't find guest log to update b/c "+error});
 		}
-		if(request.body.name) {
-			guestLogs.name = request.body.name;
+		if(req.body.name) {
+			guestLogs.name = req.body.name;
 		}
-		if(request.body.message) {
-			guestLogs.message = request.body.message;
+		if(req.body.message) {
+			guestLogs.message = req.body.message;
 		}
 
 		guestLogs.save(function(error) {

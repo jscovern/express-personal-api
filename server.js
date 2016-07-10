@@ -1,17 +1,24 @@
 // require express and other modules
 var express = require('express'),
     app = express();
+  var path = require('path');
+  var logger = require('morgan');
 
 // parse incoming urlencoded form data
 // and populate the req.body object
 var bodyParser = require('body-parser');
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 
 /************
  * DATABASE *
  ************/
 
 // var db = require('./models');
+var mongoose = require("mongoose");
+mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || "mongodb://localhost/personal-api");
+
 
 /**********
  * ROUTES *
@@ -20,6 +27,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Serve static files from the `/public` directory:
 // i.e. `/images`, `/scripts`, `/styles`
 app.use(express.static('public'));
+var routes = require('./config/routes');
+app.use(logger('dev'));
 
 /*
  * HTML Endpoints

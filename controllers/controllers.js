@@ -4,14 +4,12 @@ var GuestLog = require('../models/guestLogs');
 
 function returnAll(req,res) { //this works
 	Profile.find({},function(error, profiles) {
-		console.log("inside the find in returnAll for profiles");	
 		if(error) response.json({message: 'Could not find any profiles'});
 		res.json(profiles);
 	});
 }
 
 function postProfile(req,res) { //this works
-	console.log('in POST');
 	var profile = new Profile(req.body);
 	profile.save(function(error) {
 		if(error) res.json({message: "Could not create quote b/c: "+error});
@@ -23,16 +21,13 @@ function getAllGuestLogs(req,res) { //this works
 	GuestLog.find({},function(error,guestLogs) {
 		if(error) res.json({message: "Could not find any guest logs "+error});
 		res.json(guestLogs);
-		//console.log("these are the guest logs returned from getallguest logs: "+guestLogs);
-		//console.log("trying to get only one guest log, for index 1 "+guestLogs[1]);
-		//return guestLogs;
 	});
 }
 
-function findHighestID(req, res) {
+function findHighestID() {
 	var highestID = 0;
 	GuestLog.find({}, function(error,guestLogs) {
-		if(error) res.json({message: "Couldn't find any guest logs "+error});
+		if(error){ console.log(error);}
 		console.log("guestLogs length is "+guestLogs.length);
 		for (var i=0; i<guestLogs.length; i++) {
 			console.log("id for guestLogs["+i+"] are "+guestLogs[i]._id);
@@ -54,7 +49,7 @@ function postNewLog(req,res) { //this works
 	});
 	res.json(log);
 	console.log("outputing this from postNewLog" +log);
-	var highestExisting = findHighestID(req,res);
+	var highestExisting = findHighestID();
 	console.log(highestExisting);
 }
 
@@ -82,10 +77,7 @@ function removePost(req,res) {
 
 function updatePost(req,res) { //this works
 	var id = req.params.id;
-	console.log("in the updatePost, got id from the url as "+id);
 	GuestLog.findById({_id: id}, function(error,guestLogs) {
-		console.log("in the updatePost, and inside the GuestLog.findbyid, and the guestLogs return is "+guestLogs);
-		console.log("in the updatePost, and inside the GuestLogs.findByID, and the req.body is "+req.body);
 		if(error) {
 			res.json({message: "couldn't find guest log to update b/c "+error});
 		}

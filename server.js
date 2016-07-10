@@ -63,11 +63,6 @@ app.get('/api', function api_index(req, res) {
   });
 });
 
-router.route('/guestbook/:id')
-  .get(myController.getOneGuestsLogs) 
-  .delete(myController.removePost)
-  .put(myController.updatePost);
-
 /**********
  * SERVER *
  **********/

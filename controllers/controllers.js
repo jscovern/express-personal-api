@@ -1,5 +1,5 @@
 var Profile = require('../models/profile');
-
+var GuestLog = require('../models/guestLogs');
 //INDEX
 
 function returnAll(req,res) {
@@ -20,7 +20,10 @@ function postProfile(req,res) {
 }
 
 function getAllGuestLogs(req,res) {
-
+	GuestLog.find(function(error,guestLogs) {
+		if(error) response.json({message: "Could not find any guest logs"});
+		res.json(guestLogs);
+	});
 }
 
 function postNewLog(req,res) {

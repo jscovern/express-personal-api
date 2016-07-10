@@ -44,16 +44,46 @@ function postNewLog(req,res) {
 
 function getOneGuestsLogs(req,res) {
 	var id = req.params.id;
+	GuestLog.findById({_id: id}, function(error, guestLogs) {
+		if(error) {
+			res.json({message: 'Could not find the guest log b/c ' + error});
+		}
+		res.json(guestLogs);
+	});
 
 }
 
 function removePost(req,res) {
 	var id = req.params.id;
+	GuestLog.remove({_id: id}, function(error) {
+		if(error) {
+			res.json({message: "couldn't find guest log to remove b/c "+error});
+		}
+		res.json({message: "guest log successfully deleted"});
+	});
 
 }
 
 function updatePost(req,res) {
 	var id = req.params.id;
+	GuestLog.findById({_id: id}, function(error,guestLogs) {
+		if(error) {
+			res.json({message: "couldn't find guest log to update b/c "+error});
+		}
+		if(request.body.name) {
+			guestLogs.name = request.body.name;
+		}
+		if(request.body.message) {
+			guestLogs.message = request.body.message;
+		}
+
+		guestLogs.save(function(error) {
+			if(error) {
+				res.json({message: "couldn't save guest log b/c "+error});
+			}
+			res.json({message: 'guest log successfully update'});
+		});
+	});
 
 }
 

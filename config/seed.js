@@ -18,6 +18,12 @@ var mongoose = require('mongoose');
 var conn = mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || "mongodb://localhost/personal-api");
 var Profile = require('../models/profile');
 
+Profile.remove({}, function(err) {
+	if(err) {
+		console.log("ERROR: "+err);
+	}
+});
+
 var myProfile = {id: 1, name: "Jamie Scovern", github_link: "https://github.com/jscovern/", github_profile_image: "Hah!", current_city: "Denver, CO", pets: ["Riva", "Monty"]};
 
 Profile.create(myProfile, function(error,data) {

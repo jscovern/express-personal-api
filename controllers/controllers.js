@@ -1,4 +1,4 @@
-var Profile = require('../models/profile.js');
+var Profile = require('../models/profile');
 
 //INDEX
 
@@ -7,7 +7,7 @@ function returnAll(req,res) {
 	Profile.find(function(error, profiles) {
 		console.log("inside the find in returnAll for profiles");	
 		if(error) response.json({message: 'Could not find any profiles'});
-		response.send("hello");
+		res.send("hello");
 		//response.json(profiles);
 	});
 }

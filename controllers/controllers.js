@@ -35,7 +35,7 @@ function postNewLog(req,res) { //this works
 	var log = new GuestLog(req.body);
 	var allLogs = getAllGuestLogs(req,res);
 	console.log("in the postNewLog, and the allLogs var, which is the output of the getallguestlogs function call is "+allLogs);
-	console.log("right after that, and looking at allLogs[0] just to see what I get" + allLogs[0]);
+	//console.log("right after that, and looking at allLogs[0] just to see what I get" + allLogs[0]);
 	log.save(function(error) {
 		if(error){ 
 			res.json({message: "Could not create a new guest log b/c: "+error});

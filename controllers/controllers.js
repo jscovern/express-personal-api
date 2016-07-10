@@ -21,7 +21,9 @@ function postProfile(req,res) {
 
 function getAllGuestLogs(req,res) {
 	GuestLog.find(function(error,guestLogs) {
-		if(error) response.json({message: "Could not find any guest logs"});
+		if(error){ 
+			res.json({message: "Could not find any guest logs"});
+		}
 		res.json(guestLogs);
 	});
 }
@@ -29,10 +31,12 @@ function getAllGuestLogs(req,res) {
 function postNewLog(req,res) {
 	var log = new GuestLog(req.body);
 	log.save(function(error) {
-		if(error) res.json({message: "Could not create a new guest log b/c: "+error});
+		if(error){ 
+			res.json({message: "Could not create a new guest log b/c: "+error});
+		}
 	});
 	res.json(log);
-	console.log(log);
+	console.log("outputing this from postNewLog" +log);
 }
 
 function getOneGuestsLogs(req,res) {

@@ -24,21 +24,21 @@ function getAllGuestLogs(req,res) { //this works
 	});
 }
 
-function findHighestID() {
-	var highestID = 0;
-	GuestLog.find({}, function(error,guestLogs) {
-		if(error){ console.log(error);}
-		console.log("guestLogs length is "+guestLogs.length);
-		for (var i=0; i<guestLogs.length; i++) {
-			console.log("id for guestLogs["+i+"] are "+guestLogs[i]._id);
-			if(guestLogs[i]._id > highestID) {
-				console.log("in the if highest");
-				highestID = guestLogs[i]._id;
-			}
-		}
-		return highestID;
-	});
-}
+// function findHighestID() {
+// 	var highestID = 0;
+// 	GuestLog.find({}, function(error,guestLogs) {
+// 		if(error){ console.log(error);}
+// 		console.log("guestLogs length is "+guestLogs.length);
+// 		for (var i=0; i<guestLogs.length; i++) {
+// 			console.log("id for guestLogs["+i+"] are "+guestLogs[i]._id);
+// 			if(guestLogs[i]._id > highestID) {
+// 				console.log("in the if highest");
+// 				highestID = guestLogs[i]._id;
+// 			}
+// 		}
+// 		return highestID;
+// 	});
+// }
 
 function postNewLog(req,res) { //this works
 	var log = new GuestLog(req.body);
@@ -49,7 +49,8 @@ function postNewLog(req,res) { //this works
 	});
 	res.json(log);
 	console.log("outputing this from postNewLog" +log);
-	var highestExisting = findHighestID();
+	//var highestExisting = findHighestID();
+	var highestExisting = GuestLog.find({}).sort('-_id')[0];
 	console.log(highestExisting);
 }
 

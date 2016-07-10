@@ -3,7 +3,7 @@ var GuestLog = require('../models/guestLogs');
 //INDEX
 
 function returnAll(req,res) { //this works
-	Profile.find(function(error, profiles) {
+	Profile.find({},function(error, profiles) {
 		console.log("inside the find in returnAll for profiles");	
 		if(error) response.json({message: 'Could not find any profiles'});
 		res.json(profiles);
@@ -20,7 +20,7 @@ function postProfile(req,res) { //this works
 }
 
 function getAllGuestLogs(req,res) { //this works
-	GuestLog.find(function(error,guestLogs) {
+	GuestLog.find({},function(error,guestLogs) {
 		if(error) res.json({message: "Could not find any guest logs "+error});
 		res.json(guestLogs);
 		//console.log("these are the guest logs returned from getallguest logs: "+guestLogs);

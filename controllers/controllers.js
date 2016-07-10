@@ -3,13 +3,11 @@ var Profile = require('../models/profile');
 //INDEX
 
 function returnAll(req,res) {
-	console.log("into returnAll for profiles");
-	res.send("hello");
-//	Profile.find(function(error, profiles) {
-//		console.log("inside the find in returnAll for profiles");	
-//		if(error) response.json({message: 'Could not find any profiles'});
-		//response.json(profiles);
-//	});
+	Profile.find(function(error, profiles) {
+		console.log("inside the find in returnAll for profiles");	
+		if(error) response.json({message: 'Could not find any profiles'});
+		response.json(profiles);
+	});
 }
 
 function postProfile(req,res) {

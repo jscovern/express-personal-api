@@ -32,6 +32,7 @@ function postNewLog(req,res) {
 		if(error) res.json({message: "Could not create a new guest log b/c: "+error});
 	});
 	res.json(log);
+	console.log(log);
 }
 
 function getOneGuestsLogs(req,res) {

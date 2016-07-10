@@ -27,7 +27,11 @@ function getAllGuestLogs(req,res) {
 }
 
 function postNewLog(req,res) {
-	var log = new Log(req.body);
+	var log = new GuestLog(req.body);
+	log.save(function(error) {
+		if(error) res.json({message: "Could not create a new guest log b/c: "+error});
+	});
+	res.json(log);
 }
 
 function getOneGuestsLogs(req,res) {

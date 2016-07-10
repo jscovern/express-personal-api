@@ -1,8 +1,9 @@
 var mongoose = require('mongoose');
 
 var GuestLogSchema = mongoose.Schema({
+	_id: String,
 	name: String,
-	date_signed: String,
+	date_signed: {type: Date, default: Date.now},
 	message: String
 });
 

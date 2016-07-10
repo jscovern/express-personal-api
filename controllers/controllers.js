@@ -27,7 +27,7 @@ function getAllGuestLogs(req,res) { //this works
 		res.json(guestLogs);
 		console.log("these are the guest logs returned from getallguest logs: "+guestLogs);
 		//console.log("trying to get only one guest log, for index 1 "+guestLogs[1]);
-		return guestLogs;
+		//return guestLogs;
 	});
 }
 

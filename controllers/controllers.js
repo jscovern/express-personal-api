@@ -46,12 +46,13 @@ function postNewLog(req,res) { //this works
 		if(error){ 
 			res.json({message: "Could not create a new guest log b/c: "+error});
 		}
+		console.log(log);
+		res.json(log);
 	});
-	console.log("outputing this from postNewLog" +log);
+	//console.log("outputing this from postNewLog" +log);
 	//var highestExisting = findHighestID();
 	//var highestExisting = GuestLog.find({}).sort('-_id')[0];
 	//console.log(highestExisting);
-	res.json(log);
 }
 
 function getOneGuestsLogs(req,res) { //this works
